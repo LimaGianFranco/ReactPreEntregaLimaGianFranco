@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { products } from "../mocks/products";
+import Item from "./Item";
+import { useCarrito } from "../context/CarritoContext.jsx"; 
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
+  const { categoryId } = useParams();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const { carrito, agregarAlCarrito } = useCarrito(); 
+
+  useEffect(() => {
+    const fetchProducts = new Promise((resolve) => {
+      setTimeout(() => resolve(products), 500);
+    });
+
+    fetchProducts.then((data) => {
+      if (categoryId) {
+        setFilteredProducts(data.filter((product) => product.category === categoryId));
+      } else {
+        setFilteredProducts(data);
+      }
+    });
+  }, [categoryId]);
+
+  const handleAgregarAlCarrito = (product) => {
+    agregarAlCarrito(product);
+  };
+
   return (
-    <div style={{ padding: '20px', textAlign: 'center', color: 'white', backgroundColor: '#333' }}>
-      <h2>{greeting}</h2>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias porro rem amet rerum hic sequi culpa provident nam 
-        facilis quia suscipit, voluptas corrupti, recusandae veritatis autem similique. Earum, nostrum repudiandae..</p>
+    <div>
+      <h1>{categoryId ? `Categoría: ${categoryId}` : "Todos los productos"}</h1>
+
+      <div className="product-list" style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {filteredProducts.map((product) => (
+          <div key={product.id} style={{ flex: "1 1 21%", boxSizing: "border-box" }}>
+            <Item product={product} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

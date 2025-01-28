@@ -1,8 +1,50 @@
 body {
-  margin: 0;
-  padding: 0;
+  background-color: #f8f9fa;
 }
 
 .navbar {
-  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.card {
+  border: none;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+nav .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  font-size: 1.2rem;
+}
+
+.burger-name {
+  font-family: 'Bangers', sans-serif;
+  font-size: 2.2rem; 
+  color: #f0a500;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
 }
