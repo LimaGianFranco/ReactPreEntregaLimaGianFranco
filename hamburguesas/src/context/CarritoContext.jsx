@@ -4,21 +4,52 @@ const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
+
   const agregarAlCarrito = (producto) => {
-    const productoClon = JSON.parse(JSON.stringify(producto));
-    setCarrito((prevCarrito) => [...prevCarrito, productoClon]);
+    const productoExistente = carrito.find((item) => item.id === producto.id);
+    if (productoExistente) {
+      const nuevoCarrito = carrito.map((item) =>
+        item.id === producto.id
+          ? { ...item, cantidad: item.cantidad + producto.cantidad }
+          : item
+      );
+      setCarrito(nuevoCarrito);
+    } else {
+      setCarrito([...carrito, producto]);
+    }
   };
 
   const eliminarDelCarrito = (productoId) => {
-    setCarrito((prevCarrito) => prevCarrito.filter((producto) => producto.id !== productoId));
+    setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
   };
 
   const vaciarCarrito = () => {
     setCarrito([]);
   };
 
+  const totalUnidades = () => {
+    return carrito.reduce((total, item) => total + item.cantidad, 0);
+  };
+
+  const totalPrecio = () => {
+    return carrito.reduce((total, item) => {
+      const precio = item.price || 0; 
+      const cantidad = item.cantidad || 0; 
+      return total + (precio * cantidad); 
+    }, 0);
+  };
+
   return (
-    <CarritoContext.Provider value={{ carrito, agregarAlCarrito, eliminarDelCarrito, vaciarCarrito }}>
+    <CarritoContext.Provider
+      value={{
+        carrito,
+        agregarAlCarrito,
+        eliminarDelCarrito,
+        vaciarCarrito,
+        totalUnidades,
+        totalPrecio,
+      }}
+    >
       {children}
     </CarritoContext.Provider>
   );

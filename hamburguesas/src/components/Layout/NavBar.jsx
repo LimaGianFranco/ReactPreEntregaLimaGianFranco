@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { useCarrito } from "../context/CarritoContext"; 
+import { useCarrito } from "../../context/CarritoContext"; 
 
 const NavBar = () => {
   const { carrito } = useCarrito();  
@@ -11,9 +11,9 @@ const NavBar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand text-warning fw-bold display-4 burger-name" to="/">
-          Burger Heaven
+          Burger RULO
         </Link>
-        
+
         <button 
           className="navbar-toggler" 
           type="button" 
@@ -38,9 +38,13 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <Link to="/cart" className="btn btn-outline-light">
-          <FontAwesomeIcon icon={faShoppingCart} />
-          {carrito.length > 0 && <span className="badge bg-danger">{carrito.length}</span>}
+        <Link to="/cart" className="btn btn-outline-light position-relative">
+          <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+          {carrito.length > 0 && (
+            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {carrito.length}
+            </span>
+          )}
         </Link>
       </div>
     </nav>

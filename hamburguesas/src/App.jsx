@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CarritoProvider } from "./context/CarritoContext";
-import NavBar from "./components/NavBar";
-import ItemListContainer from "./components/ItemListContainer";
-import ItemDetailContainer from "./components/ItemDetailContainer";
+import NavBar from "./components/Layout/NavBar";
+import ItemListContainer from "./components/Item/ItemListContainer";
+import ItemDetailContainer from "./components/Item/ItemDetailContainer";
 import Menu from "./components/Menu";
 import Promociones from "./components/Promociones";
 import Contacto from "./components/Contacto";
-import Cart from "./components/Cart";
+import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout/Checkout";
 
 const App = () => {
   return (
@@ -21,7 +22,8 @@ const App = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/promociones" element={<Promociones />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route path="/cart" element={<Cart />} />  
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} /> 
         </Routes>
       </Router>
     </CarritoProvider>

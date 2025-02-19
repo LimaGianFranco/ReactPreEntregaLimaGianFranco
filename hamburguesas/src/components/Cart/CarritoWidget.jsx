@@ -1,5 +1,5 @@
 import React from "react";
-import { useCarrito } from "../CarritoContext";
+import { useCarrito } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
 const CarritoWidget = () => {
